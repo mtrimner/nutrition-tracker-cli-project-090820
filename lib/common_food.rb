@@ -1,9 +1,9 @@
 class CommonFood
 
-    attr_accessor :food_name
+    attr_accessor :food_name, :carbs, :fat, :protein, :calories
 
     @@all = []
-    
+
     def initialize(food)
         @food_name = food[:food_name]
         @@all << self
