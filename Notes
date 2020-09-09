@@ -1,0 +1,7 @@
+Git Push
+
+git add . or "modified file"
+
+git commit -m "notes"
+
+git status
