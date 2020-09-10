@@ -1,11 +1,3 @@
-# require_relative '../lib/branded_food'
-# require_relative '../lib/common_food'
-# require_relative '../lib/cli'
-# require 'uri'
-# require 'json'
-# require 'pry'
-# require 'net/http'
-
 class CLI 
  
     def run
@@ -57,15 +49,12 @@ class CLI
             puts "Please search for another food!"
             input = gets.chomp
             API.food_search(input)
-            # puts "Please select an option below!"
             list_foods
             menu
         else another_lookup == "no"
             puts "Goodbye!"
             exit
         end
-
-
     end
 
     def displays_food_info(food)
@@ -75,5 +64,4 @@ class CLI
         puts "Total Fat = #{food[:nf_total_fat].round(1)}g"
         puts "Carbs = #{food[:nf_total_carbohydrate].round(1)}g"
     end
-
 end
