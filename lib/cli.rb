@@ -2,7 +2,7 @@ require_relative '../lib/branded_food'
 require_relative '../lib/common_food'
 require_relative '../lib/cli'
 require 'uri'
-require 'httpclient'
+# require 'httpclient'
 require 'json'
 require 'pry'
 require 'net/http'
@@ -45,7 +45,7 @@ class CLI
             selected_food_info = API.get_common_food_nutrients(selected_food_name)
             # binding.pry
             displays_food_info(selected_food_info)
-            # binding.pry
+            binding.pry
         elsif input.to_i.between?(CommonFood.all.length+1, BrandedFood.all.length+CommonFood.all.length)
             food_choice = BrandedFood.all[input.to_i-1 - CommonFood.all.length]
             # binding.pry
@@ -54,12 +54,15 @@ class CLI
             selected_food_info = API.get_branded_food_nutrients(selected_food_id)
             # binding.pry
             displays_food_info(selected_food_info)
-        else puts "Number not valid, please try again."
+        else 
+            puts "Number not valid, please try again."
         end
         puts "Would you like to lookup more food?"
         puts "Please enter Y or N"
         another_lookup = gets.strip.downcase
         if another_lookup == "y"
+            BrandedFood.reset
+            CommonFood.reset
             puts "Please search for another food below."
             input = gets.chomp
             API.food_search(input)
@@ -67,15 +70,19 @@ class CLI
             list_foods
             menu
         else another_lookup == "no"
-            
+            puts "Goodbye!"
+            exit
+        end
+
 
     end
 
     def displays_food_info(selected_food_info)
-        puts "#{selected_food_info[:food_name]} has the following per #{selected_food_info[:serving_qty]}#{selected_food_info[:serving_unit]}"
-        puts "#{selected_food_info[:nf_protein]}g of protein"
-        puts "#{selected_food_info[:nf_total_fat]}g of fat"
-        puts "#{selected_food_info[:nf_total_carbohydrate]}g of carbs"
+        puts "#{selected_food_info[:food_name]} has the following per #{selected_food_info[:serving_qty]} #{selected_food_info[:serving_unit]}"
+        puts "Total calories = #{selected_food_info[:nf_calories]}"
+        puts "Protein = #{selected_food_info[:nf_protein]}g"
+        puts "Total Fat = #{selected_food_info[:nf_total_fat]}g"
+        puts "Carbs = #{selected_food_info[:nf_total_carbohydrate]}g"
     end
 
 end
