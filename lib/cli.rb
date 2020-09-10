@@ -16,7 +16,7 @@ class CLI
         puts "Please select and option below!"
         list_foods
         menu
-        binding.pry
+        # binding.pry
     end
     def list_foods
         puts "Common Suggestions:"
@@ -38,13 +38,13 @@ class CLI
         input = gets.chomp
         if input.to_i.between?(1, CommonFood.all.length)
             food_choice = CommonFood.all[input.to_i-1]
-            binding.pry
+            # binding.pry
             selected_food_name = food_choice.food_name
-            binding.pry
+            # binding.pry
             selected_food_info = API.get_common_food_nutrients(selected_food_name)
-            binding.pry
+            # binding.pry
             displays_food_info(selected_food_info)
-            binding.pry
+            # binding.pry
         elsif input.to_i.between?(CommonFood.all.length+1, BrandedFood.all.length+CommonFood.all.length)
             food_choice = BrandedFood.all[CommonFood.all.length + input.to_i-1]
             selected_food_id = food_choice.nix_item_id
