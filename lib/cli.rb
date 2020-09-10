@@ -27,14 +27,15 @@ class CLI
     def menu
             input = gets.chomp
         if input.to_i.between?(1, CommonFood.all.length)
-            food_choice = CommonFood.all[input.to_i-1]
-            selected_food_name = food_choice.food_name
-            selected_food_info = API.get_common_food_nutrients(selected_food_name)
+            food_choice = CommonFood.all[input.to_i-1].food_name
+            binding.pry
+            # selected_food_name = food_choice.food_name
+            selected_food_info = API.get_common_food_nutrients(food_choice)
             displays_food_info(selected_food_info)
         elsif input.to_i.between?(CommonFood.all.length+1, BrandedFood.all.length+CommonFood.all.length)
-            food_choice = BrandedFood.all[input.to_i-1 - CommonFood.all.length]
-            selected_food_id = food_choice.nix_item_id
-            selected_food_info = API.get_branded_food_nutrients(selected_food_id)
+            food_choice = BrandedFood.all[input.to_i-1 - CommonFood.all.length].nix_item_id
+            # selected_food_id = food_choice.nix_item_id
+            selected_food_info = API.get_branded_food_nutrients(food_choice)
             displays_food_info(selected_food_info)
         else 
             puts "Number not valid, please try again."
