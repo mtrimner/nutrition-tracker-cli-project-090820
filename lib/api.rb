@@ -1,11 +1,10 @@
-require_relative '../lib/branded_food'
-require_relative '../lib/common_food'
-require_relative '../lib/cli'
-require 'uri'
-# require 'httpclient'
-require 'json'
-require 'pry'
-require 'net/http'
+# require_relative '../lib/branded_food'
+# require_relative '../lib/common_food'
+# require_relative '../lib/cli'
+# require 'uri'
+# require 'json'
+# require 'pry'
+# require 'net/http'
 
 # X-APP-ID = 288d43cd
 # X-APP-KEY = 8fec0adf08110aaf257cb4d4665594e6
@@ -46,8 +45,9 @@ class API
         request["x-app-id"] = "288d43cd"
         request["x-app-key"] = "8fec0adf08110aaf257cb4d4665594e6"
         response = https.request(request)
-        response_hash = JSON.parse(response.read_body, symbolize_names:true)
-        nutrient_hash = response_hash[:foods][0]
+        response_hash = JSON.parse(response.read_body, symbolize_names:true)[:foods][0]
+       
+        # nutrient_hash = response_hash[:foods][0]
 
     end
 
@@ -65,8 +65,8 @@ class API
         request["x-app-key"] = "8fec0adf08110aaf257cb4d4665594e6"
         request.body = "query=#{food}"      
         response = https.request(request)
-        response_hash = JSON.parse(response.read_body, symbolize_names:true)
-        nutrient_hash = response_hash[:foods][0]
+        response_hash = JSON.parse(response.read_body, symbolize_names:true)[:foods][0]
+        # nutrient_hash = response_hash[:foods][0]
 
     end
 
