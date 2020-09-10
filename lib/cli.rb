@@ -9,7 +9,15 @@ require 'net/http'
 
 class CLI 
  
-    attr_accessor :selected_food_name
+    def run
+        puts "Hello! Please enter a food below."
+        input = gets.chomp
+        API.food_search(input)
+        puts "Please select and option below!"
+        list_foods
+        menu
+        binding.pry
+    end
     def list_foods
         puts "Common Suggestions:"
         CommonFood.all.each.with_index(1) do |food, i|
@@ -21,16 +29,21 @@ class CLI
         end
 
     end
+    
 
 
     def menu
         puts "Please select a number to get food info."
+        
         input = gets.chomp
         if input.to_i.between?(1, CommonFood.all.length)
             food_choice = CommonFood.all[input.to_i-1]
             binding.pry
             selected_food_name = food_choice.food_name
-            API.get_common_food_nutrients(selected_food_name)
+            binding.pry
+            selected_food_info = API.get_common_food_nutrients(selected_food_name)
+            binding.pry
+            displays_food_info(selected_food_info)
             binding.pry
         elsif input.to_i.between?(CommonFood.all.length+1, BrandedFood.all.length+CommonFood.all.length)
             food_choice = BrandedFood.all[CommonFood.all.length + input.to_i-1]
@@ -39,8 +52,11 @@ class CLI
         end
     end
 
-    # def find_common_food_from_input(input)
-    #     selected_hash = CommonFood.all[input.to_i-1]
-    #     selected_hash
+    def displays_food_info(selected_food_info)
+        puts "#{selected_food_info[:food_name]} has the following per #{selected_food_info[:serving_qty]}#{selected_food_info[:serving_unit]}"
+        puts "#{selected_food_info[:nf_protein]}g of protein"
+        puts "#{selected_food_info[:nf_total_fat]}g of fat"
+        puts "#{selected_food_info[:nf_total_carbohydrate]}g of carbs"
+    end
 
 end
