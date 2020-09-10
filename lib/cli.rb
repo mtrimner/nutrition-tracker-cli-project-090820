@@ -12,8 +12,10 @@ class CLI
     def run
         puts "Hello! Please enter a food below."
         input = gets.chomp
+        binding.pry
         API.food_search(input)
-        puts "Please select and option below!"
+        binding.pry
+        puts "Please select an option below!"
         list_foods
         menu
         # binding.pry
@@ -34,8 +36,7 @@ class CLI
 
     def menu
         puts "Please select a number to get food info."
-        
-        input = gets.chomp
+            input = gets.chomp
         if input.to_i.between?(1, CommonFood.all.length)
             food_choice = CommonFood.all[input.to_i-1]
             # binding.pry
@@ -46,10 +47,28 @@ class CLI
             displays_food_info(selected_food_info)
             # binding.pry
         elsif input.to_i.between?(CommonFood.all.length+1, BrandedFood.all.length+CommonFood.all.length)
-            food_choice = BrandedFood.all[CommonFood.all.length + input.to_i-1]
+            food_choice = BrandedFood.all[input.to_i-1 - CommonFood.all.length]
+            # binding.pry
             selected_food_id = food_choice.nix_item_id
+            # binding.pry
+            selected_food_info = API.get_branded_food_nutrients(selected_food_id)
+            # binding.pry
+            displays_food_info(selected_food_info)
         else puts "Number not valid, please try again."
         end
+        puts "Would you like to lookup more food?"
+        puts "Please enter Y or N"
+        another_lookup = gets.strip.downcase
+        if another_lookup == "y"
+            puts "Please search for another food below."
+            input = gets.chomp
+            API.food_search(input)
+            puts "Please select an option below!"
+            list_foods
+            menu
+        else another_lookup == "no"
+            
+
     end
 
     def displays_food_info(selected_food_info)
