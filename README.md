@@ -32,3 +32,11 @@ The Common Foods list works best for generic items like chicken, steak, pork, et
 The Branded Foods list works best if you ate a specific product or had a meal at a well known restaurant.
 
 Once you select a number corresponding with the food you wanted, you will see a breakdown of the calories, carbs, total fat, and protein per serving. 
+
+# Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/mtrimner/nutrition-tracker-cli-project-090820.
+
+# License
+
+This program is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
