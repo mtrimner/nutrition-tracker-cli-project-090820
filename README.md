@@ -16,3 +16,9 @@ gem install pry
 ```
 gem install json
 ```
+
+# How To Run The Program
+
+After you have cloned and opened the repo on our computer, enter ```ruby bin/run.rb``` in your terminal.
+
+Then, follow the instructions on screen.
