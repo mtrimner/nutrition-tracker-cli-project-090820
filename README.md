@@ -21,4 +21,14 @@ gem install json
 
 After you have cloned and opened the repo on our computer, enter ```ruby bin/run.rb``` in your terminal.
 
-Then, follow the instructions on screen.
+You will see a prompt to search for a food. 
+
+You can be as specific or board as you want. Whether you type "chicken" or "I ate a Big Mac from McDonalds", the program should find what you are looking for. 
+
+Two lists will appear. One for common foods and one for branded products and restaurant items.
+
+The Common Foods list works best for generic items like chicken, steak, pork, etc.
+
+The Branded Foods list works best if you ate a specific product or had a meal at a well known restaurant.
+
+Once you select a number corresponding with the food you wanted, you will see a breakdown of the calories, carbs, total fat, and protein per serving. 
