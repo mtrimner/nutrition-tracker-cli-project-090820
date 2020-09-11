@@ -40,8 +40,6 @@ class API
     end
 
 
-
-
     # This will allow users access to a large USDA database of common foods.
     def self.get_common_food_nutrients(food)
         url = URI("https://trackapi.nutritionix.com/v2/natural/nutrients")
