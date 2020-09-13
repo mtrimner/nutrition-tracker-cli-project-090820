@@ -2,7 +2,7 @@ class CLI
  
     def run
         puts "Welcome to the Nutrition Database Lookup!"
-        puts "Hello! Please TYPE a food below."
+        puts "Please TYPE a food below!"
         input = gets.chomp
         API.food_search(input)
         list_foods
