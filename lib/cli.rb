@@ -28,7 +28,7 @@ class CLI
             input = gets.chomp
         if input.to_i.between?(1, CommonFood.all.length)
             food_choice = CommonFood.all[input.to_i-1].food_name
-            binding.pry
+            # binding.pry
             # selected_food_name = food_choice.food_name
             selected_food_info = API.get_common_food_nutrients(food_choice)
             displays_food_info(selected_food_info)
@@ -42,7 +42,34 @@ class CLI
             menu
         end
         puts "Would you like to lookup more food?"
-        puts "Please enter Y or N"
+        # puts "Please enter Y or N"
+        look_up_more_food
+        # another_lookup = gets.strip.downcase
+        # if another_lookup == "y"
+        #     BrandedFood.reset
+        #     CommonFood.reset
+        #     puts "Please search for another food!"
+        #     input = gets.chomp
+        #     API.food_search(input)
+        #     list_foods
+        #     menu
+        # elsif another_lookup == "n"
+        #     puts "Goodbye!"
+        #     exit
+        # else puts "Not recognized. Please enter y or no."
+        # end
+    end
+
+    def displays_food_info(food)
+        puts "#{food[:food_name]} has the following per #{food[:serving_qty]} #{food[:serving_unit]}"
+        puts "Total calories = #{food[:nf_calories].round(1)}"
+        puts "Protein = #{food[:nf_protein].round(1)}g"
+        puts "Total Fat = #{food[:nf_total_fat].round(1)}g"
+        puts "Carbs = #{food[:nf_total_carbohydrate].round(1)}g"
+    end
+
+    def look_up_more_food
+        puts "Please enter Y or N."
         another_lookup = gets.strip.downcase
         if another_lookup == "y"
             BrandedFood.reset
@@ -52,17 +79,11 @@ class CLI
             API.food_search(input)
             list_foods
             menu
-        else another_lookup == "no"
+        elsif another_lookup == "n"
             puts "Goodbye!"
             exit
+        else puts "Not recognized."
         end
-    end
-
-    def displays_food_info(food)
-        puts "#{food[:food_name]} has the following per #{food[:serving_qty]} #{food[:serving_unit]}"
-        puts "Total calories = #{food[:nf_calories].round(1)}"
-        puts "Protein = #{food[:nf_protein].round(1)}g"
-        puts "Total Fat = #{food[:nf_total_fat].round(1)}g"
-        puts "Carbs = #{food[:nf_total_carbohydrate].round(1)}g"
+        look_up_more_food
     end
 end
