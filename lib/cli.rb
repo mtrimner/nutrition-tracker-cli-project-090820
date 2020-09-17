@@ -3,9 +3,14 @@ class CLI
     def run
         puts "Welcome to the Nutrition Database Lookup!"
         puts "Please TYPE a food below!"
-        input = gets.chomp
-        API.food_search(input)
-        list_foods
+        search
+        # input = gets.chomp
+        # food_search_result = API.food_search(input)
+        # if food_search_result == []
+        #     puts "Ooops! We didn't quite understand. Try again!"
+        #     search
+        # else list_foods
+        # end
         menu
     end
     
@@ -60,6 +65,16 @@ class CLI
         # end
     end
 
+    def search
+    input = gets.chomp
+        food_search_result = API.food_search(input)
+        if food_search_result == []
+            puts "Ooops! We didn't quite understand. Try again!"
+            search
+        else list_foods
+        end
+    end
+
     def displays_food_info(food)
         puts "#{food[:food_name]} has the following per #{food[:serving_qty]} #{food[:serving_unit]}"
         puts "Total calories = #{food[:nf_calories].round(1)}"
@@ -75,8 +90,9 @@ class CLI
             BrandedFood.reset
             CommonFood.reset
             puts "Please search for another food!"
-            input = gets.chomp
-            API.food_search(input)
+            search
+            # input = gets.chomp
+            # API.food_search(input)
             list_foods
             menu
         elsif another_lookup == "n"
